@@ -1,0 +1,75 @@
+@use "../mixins";
+
+.login-section{
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (width: 576px) {
+        flex-direction: column;
+    }
+
+    .image-wrapper{
+        width: 50%;
+        height: 100%;
+        @media (max-width: 767px) {
+            width: 45%;
+        }
+
+        @media (max-width: 576px) {
+            display: none;
+        }
+    }
+
+    .mobile-login-image{
+        width: 100vw;
+        height: auto;
+        @media (min-width: 576px) {
+            display: none;
+        }
+    }
+
+    .mobile-login-header{
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+    }
+
+    .right{
+        width: 50%;
+        background-color: #f4f4f4;
+
+        @media (max-width: 576px) {
+            width: 100%;
+            height: 50dvh;
+            padding-bottom: 2rem;
+        }
+
+       
+        p{
+            color: #393939;
+            text-align: center;
+        }
+    
+        a{
+            color: #ad1deb;
+            text-decoration: underline;
+        }
+
+        .span-text{
+            background: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%); 
+            -webkit-background-clip: text; 
+            color: transparent; 
+            display: inline-block;
+            font-weight: 700;
+        }
+    
+    
+    }
+
+    
+}

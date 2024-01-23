@@ -1,0 +1,71 @@
+.home-section{
+    padding-left: 18rem;
+    height: 100vh;
+
+    p{
+        color: #393939;
+    }
+
+    .no-card{
+        width: 15rem;
+        height: 3rem;
+    }
+
+    .modal{
+        color: #393939;
+        
+        .form-control{
+            border-radius: 2rem;
+        }
+    }
+
+    .mock-card{
+        width: 17rem;
+        height: 28rem;
+        background-color: white;
+        border: 2px dashed #d3d3d3;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 6px #88888874;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: 3rem;
+
+        @media (max-width: 767px) {
+            margin-right: 0;
+            margin-top: 2rem;
+          }
+
+        .logo{
+            width: 5.5rem;
+            height: 5.5rem;
+            border-radius: 5.5rem;
+            background-color: #dddddd;
+        }
+
+        .text{
+            height: 0.75rem;
+            width: 6.5rem;
+            background-color: #dddddd;
+            margin-top: 1rem;
+        }
+
+        .stamps{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 2rem;
+            gap: 0.75rem;
+            .stamp{
+                height: 4rem;
+                width: 4rem;
+                border-radius: 4rem;
+                background-color: #dddddd;
+            }
+        }
+    }
+}

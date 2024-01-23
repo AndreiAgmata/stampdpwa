@@ -1,0 +1,19 @@
+@use "./mixins";
+
+.sideBar-section{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18rem;
+    height: 100vh;
+    @include mixins.background;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+
+    a{
+        display : flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}

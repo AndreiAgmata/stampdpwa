@@ -1,0 +1,37 @@
+.custom-modal-background{
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(133,133,133); 
+    background-color: rgba(201, 201, 201, 0.66); 
+}
+
+.custom-modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.174);
+    z-index: 999;
+
+    .custom-modal-header{
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.174);
+    }
+
+    .custom-modal-body{
+        width: 500px;
+        height: 500px;
+    }
+
+    .custom-modal-footer{
+        padding: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.174);
+    }
+}

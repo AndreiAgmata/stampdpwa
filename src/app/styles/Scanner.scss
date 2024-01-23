@@ -1,0 +1,18 @@
+#reader {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    video{
+        width: 465px !important;
+        height: 465px !important;
+        object-fit: cover;
+    }
+
+    #qr-shaded-region{
+        border-width: 107.5px !important;
+        border-color: #6e73fc5d !important;
+    }
+  
+}
+

@@ -1,0 +1,48 @@
+.cards-wrapper{
+    
+    .card-custom{
+        width: 17rem;
+        height: 28rem;
+        background-color: white;
+        border: 1px solid #d3d3d3da;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 6px #8888882d;
+        padding: 1.5rem;
+
+        .logo-container{
+            width: 5.5rem;
+            height: 5.5rem;
+            
+        }
+
+        .logo{
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            background-color: #dddddd;
+        }
+
+        h2{
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.75rem;
+        }
+
+        .stamps{
+            // display: flex;
+            // flex-direction: row;
+            // flex-wrap: wrap;
+            // justify-content: space-evenly;
+            // align-items: center;
+            // gap: 1rem;
+
+            .stamp{
+                height: 3rem;
+                width: 3rem;
+                // border-radius: 100%;
+                background-color: #dddddd;
+            }
+        }
+    }
+}

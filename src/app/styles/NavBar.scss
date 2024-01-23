@@ -1,0 +1,18 @@
+@use './mixins';
+
+.navbar-section{
+    height: 5rem;
+    width: 100%;
+    @include mixins.background;
+    box-shadow: 0 1px 1rem rgba(0, 0, 0, 0.15);
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius:4rem;
+    position: fixed; 
+    z-index: 999;
+
+    @media (max-width: 767px) {
+        height: 4rem;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+    }
+}
