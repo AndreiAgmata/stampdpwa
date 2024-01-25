@@ -33,9 +33,8 @@ const getUserCards = async () => {
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch Card Details");
+      throw new Error("Failed to fetch Card Detailssss");
     }
-
     const data = await res.json();
     return data.cards;
   } catch (error) {

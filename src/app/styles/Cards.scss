@@ -43,6 +43,42 @@
                 // border-radius: 100%;
                 background-color: #dddddd;
             }
+
+            .add-stamp{
+                transition: transform 0.3s ease-in-out;
+
+                &:hover{
+                    transform: scale(1.05);
+                    cursor: pointer;  
+                }
+            }
+        }
+
+
+        .links{
+            display: flex;
+            flex-direction: column;
+
+            .icon{
+                width: 1.25rem;
+                height: auto;
+            }
+
+            .link-text{
+                font-size: 0.65rem;
+
+               
+            }
+        }
+
+        .offer-details{
+            ::-webkit-scrollbar {
+                width: 0.5rem; 
+              }
+              
+              ::-webkit-scrollbar-thumb {
+                background-color: transparent; 
+              }
         }
     }
 }

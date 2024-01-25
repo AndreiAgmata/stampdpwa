@@ -1,4 +1,4 @@
-import mongoose, { Schema, models } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const businessSchema = new Schema(
   {
@@ -27,11 +27,20 @@ const businessSchema = new Schema(
       type: String,
       required: true,
     },
+    stampCode: {
+      type: String,
+      required: true,
+    },
     clients: [
       {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
       },
     ],
+    activeCardRef: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Card",
+    },
     cards: [
       {
         card_id: {

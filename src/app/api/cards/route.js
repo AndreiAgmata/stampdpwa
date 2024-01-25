@@ -12,8 +12,18 @@ export async function GET() {
   try {
     await connectMongoDB();
 
-    //get cards from user including the card Details
-    const user = await User.findById(userId).populate("cards.cardRef");
+    //get cards array
+    const user = await User.findById(userId)
+      .populate({
+        path: "cards.businessRef",
+        model: "Business",
+        select: "activeCardRef",
+        populate: {
+          path: "activeCardRef",
+          model: "Card",
+        },
+      })
+      .select("cards");
 
     if (!user) {
       return NextResponse.json(
@@ -21,7 +31,19 @@ export async function GET() {
         { status: 500 }
       );
     }
-    return NextResponse.json({ cards: user.cards }, { status: 201 });
+
+    const cards = [];
+
+    user.cards.forEach((ref) => {
+      const card = {
+        cardRef: ref.businessRef.activeCardRef,
+        currentNumStamps: ref.currentNumStamps,
+        _id: ref._id,
+      };
+      cards.push(card);
+    });
+
+    return NextResponse.json({ cards }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { message: "Unable to fetch Cards" },

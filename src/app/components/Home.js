@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import "../styles/Home.scss";
 import { FaSearch } from "react-icons/fa";
 import { IoQrCode } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Scanner from "./Scanner";
 import "../styles/Modal.scss";
 import Cards from "./Cards";
@@ -15,7 +15,6 @@ function Home(props) {
   const [businessList, setBusinessList] = useState(props.businesses);
   const [searchString, setSearchString] = useState("");
   const [scanTrigger, setScanTrigger] = useState("");
-  const [scannedText, setScannedText] = useState("");
   const [scanModalOpen, setScanModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
 
@@ -41,16 +40,28 @@ function Home(props) {
     }
   };
 
+  const handleCloseModal = () => {
+    handleSearchModal("close");
+    handleScanModal("close");
+  };
+
   const handleAddCard = async (id) => {
     handleSearchModal("close");
     try {
       const res = await fetch(`/api/cards/add`, {
         method: "POST",
-        body: JSON.stringify({ cardId: id }),
+        body: JSON.stringify({ businessId: id }),
       });
 
       if (!res.ok) {
-        console.log("An error occurred, unable to add card");
+        switch (res.status) {
+          case 409:
+            console.log("This card already exists");
+            break;
+          case 400:
+            console.log("No card found");
+            break;
+        }
       } else {
         router.refresh();
         console.log("Added Card");
@@ -77,36 +88,45 @@ function Home(props) {
     <section className="home-section">
       <div className="container-fluid pt-5 ms-5">
         <div className="header">
-          <div className="row d-flex align-items-center mb-2">
-            <div className="col-md-3">
-              <h2 className="dark fw-bold mb-0">
-                Hello {session?.user?.userName} 👋🏻!
-              </h2>
+          {props.cards.length !== 0 ? (
+            <div className="row d-flex align-items-center mb-2">
+              <div className="col-md-3">
+                <h2 className="dark fw-bold mb-0">
+                  Hello {session?.user?.userName} 👋🏻!
+                </h2>
+              </div>
+              <div className="col-md-6 d-flex gap-2">
+                <button
+                  type="button"
+                  className="btn-custom d-flex align-items-center gap-2"
+                  onClick={() => {
+                    handleSearchModal("open");
+                  }}
+                >
+                  <FaSearch />
+                  Search
+                </button>
+                <button
+                  type="button"
+                  className="btn-custom d-flex align-items-center gap-2"
+                  onClick={() => {
+                    handleScanModal("open");
+                  }}
+                >
+                  <IoQrCode />
+                  Scan QR Code
+                </button>
+              </div>
             </div>
-            <div className="col-md-6 d-flex gap-2">
-              <button
-                type="button"
-                className="btn-custom d-flex align-items-center gap-2"
-                onClick={() => {
-                  handleSearchModal("open");
-                }}
-              >
-                <FaSearch />
-                Search
-              </button>
-              <button
-                type="button"
-                className="btn-custom d-flex align-items-center gap-2"
-                onClick={() => {
-                  handleScanModal("open");
-                }}
-              >
-                <IoQrCode />
-                Scan QR Code
-              </button>
+          ) : (
+            <div className="row d-flex align-items-center mb-2">
+              <div className="col-md-3">
+                <h2 className="dark fw-bold mb-0">
+                  Hello {session?.user?.userName} 👋🏻!
+                </h2>
+              </div>
             </div>
-          </div>
-
+          )}
           {props.cards.length !== 0 ? (
             <p>
               Ready to earn rewards? Scan a QR code and start collecting stamps!
@@ -165,7 +185,11 @@ function Home(props) {
         )}
       </div>
       {scanModalOpen && (
-        <div className="custom-modal-background">
+        <>
+          <div
+            className="custom-modal-background"
+            onClick={handleCloseModal}
+          ></div>
           <div className="custom-modal">
             <div className="custom-modal-header">
               <h2 className="title coloured m-0 fw-bold fs-2">Scan QR Code</h2>
@@ -188,10 +212,14 @@ function Home(props) {
               </button>
             </div>
           </div>
-        </div>
+        </>
       )}
       {searchModalOpen && (
-        <div className="custom-modal-background">
+        <>
+          <div
+            className="custom-modal-background"
+            onClick={handleCloseModal}
+          ></div>
           <div className="custom-modal">
             <div className="custom-modal-header">
               <h2 className="title coloured m-0 fw-bold fs-2">Search</h2>
@@ -236,7 +264,7 @@ function Home(props) {
                       className="btn-custom ms-auto w-25 p-1 "
                       style={{ height: "2.5rem" }}
                       onClick={() => {
-                        handleAddCard(business._id);
+                        handleAddCard(business.businessId);
                       }}
                     >
                       Add Card
@@ -257,7 +285,7 @@ function Home(props) {
               </button>
             </div>
           </div>
-        </div>
+        </>
       )}
     </section>
   );

@@ -25,9 +25,9 @@ const userSchema = new Schema(
     },
     cards: [
       {
-        cardRef: {
+        businessRef: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Card",
+          ref: "Business",
         },
         currentNumStamps: {
           type: Number,

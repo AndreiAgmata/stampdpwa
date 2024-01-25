@@ -3,24 +3,33 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "../../../../../lib/mongodb";
 import User from "../../../../../models/user";
+import Business from "../../../../../models/business";
 
 export async function POST(req) {
   const session = await getServerSession(authOptions);
   const userId = session.user._id;
-  const { cardId } = await req.json();
-  const cardToAdd = { cardRef: cardId };
+  const { businessId } = await req.json();
+  const cardToAdd = { businessRef: businessId };
   try {
     await connectMongoDB();
 
+    //check if card is valid
+    const business = await Business.find({ _id: businessId });
+
+    if (business.length === 0) {
+      return NextResponse.json({ message: "No Card found" }, { status: 400 });
+    }
+
+    //check if card has already been added
     const isCardIdUnique = await User.exists({
       _id: userId,
-      "cards.cardRef": cardId,
+      "cards.businessRef": businessId,
     });
 
     if (isCardIdUnique) {
       return NextResponse.json(
         { message: "Card already exists for the user" },
-        { status: 400 }
+        { status: 409 }
       );
     }
 
