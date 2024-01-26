@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 743 743">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #6e72fc;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 60px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_5" data-name="Layer 5">
+    <g id="SVGRepo_iconCarrier" data-name="SVGRepo iconCarrier">
+      <path class="cls-1" d="m231.89,524c0-79.04,64.07-143.11,143.11-143.11s143.11,64.07,143.11,143.11m-61.33-286.22c0,45.16-36.61,81.78-81.78,81.78s-81.78-36.61-81.78-81.78,36.62-81.78,81.78-81.78,81.78,36.61,81.78,81.78Z"/>
+    </g>
+    <circle class="cls-1" cx="371.5" cy="371.5" r="341.5"/>
+  </g>
+</svg>

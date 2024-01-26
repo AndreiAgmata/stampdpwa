@@ -1,6 +1,12 @@
 .home-section{
-    padding-left: 18rem;
+    padding-left: 20rem;
+    padding-top: 3rem;
     height: 100vh;
+
+    @media (max-width: 767px) {
+        padding-top: 6rem;
+        padding-inline: 0;
+    }
 
     p{
         color: #393939;

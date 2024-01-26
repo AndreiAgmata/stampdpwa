@@ -20,6 +20,17 @@
     border: 1px solid rgba(0, 0, 0, 0.174);
     z-index: 999;
 
+    @media (max-width : 767px){
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        width: 100%;
+        height: 100vh;
+    }
+
     .custom-modal-header{
         padding: 1rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.174);
@@ -28,10 +39,19 @@
     .custom-modal-body{
         width: 500px;
         height: 500px;
+
+        @media (max-width : 767px){
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .custom-modal-footer{
         padding: 1rem;
         border-top: 1px solid rgba(0, 0, 0, 0.174);
+
+        @media (max-width : 767px){
+            display: none;         
+        }
     }
 }

@@ -60,7 +60,8 @@ const Scanner = ({ triggerScan, onQRCodeScanned }) => {
 
   return (
     <>
-      <div id="reader" style={{ width: "465px", height: "465px" }}></div>
+      {/* <div id="reader" style={{ width: "465px", height: "465px" }}></div> */}
+      <div id="reader"></div>
     </>
   );
 };

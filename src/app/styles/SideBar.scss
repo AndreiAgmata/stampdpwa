@@ -10,6 +10,10 @@
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
 
+    @media (max-width: 767px) {
+        display: none;
+    }
+
     a{
         display : flex;
         justify-content: center;

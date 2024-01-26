@@ -9,10 +9,17 @@
     border-bottom-right-radius:4rem;
     position: fixed; 
     z-index: 999;
+    padding: 1rem;
+
+  
 
     @media (max-width: 767px) {
         height: 4rem;
         border-bottom-left-radius: 1rem;
         border-bottom-right-radius: 1rem;
+
+        h1{
+            font-size: calc(1.375rem + 1.5vw);
+        }
     }
 }

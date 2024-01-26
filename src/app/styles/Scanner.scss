@@ -2,16 +2,46 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 500px !important;
+    height: 500px !important;
+
+    @media (max-width : 767px){
+       top: 0;
+       left: 0;
+       transform: none;
+       height: 100% !important;
+       width: 100% !important;
+       display: flex;
+    }
 
     video{
-        width: 465px !important;
-        height: 465px !important;
-        object-fit: cover;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;  
+        @media (max-width : 767px){
+            // height: 800px !important;
+            // width: 430px !important;
+            height: 70% !important;
+            width: 100% !important;
+            object-fit: cover;
+        }
     }
 
     #qr-shaded-region{
-        border-width: 107.5px !important;
+        height: 70% !important;
+        width: 100% !important;
+        border-bottom-width: 180px !important;
+        border-top-width: 180px !important;
+        border-left-width: 70px !important;
+        border-right-width: 70px !important;
         border-color: #6e73fc5d !important;
+
+        @media (max-width : 767px){
+            // border-top-width: 100px !important;
+            // border-inline-width: 80px !important;
+            // border-bottom-width: 400px !important;
+        }
+
     }
   
 }

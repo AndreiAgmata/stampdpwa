@@ -86,16 +86,14 @@ function Home(props) {
 
   return (
     <section className="home-section">
-      <div className="container-fluid pt-5 ms-5">
-        <div className="header">
+      <div className="container-fluid">
+        <div className="header d-none d-sm-block">
           {props.cards.length !== 0 ? (
-            <div className="row d-flex align-items-center mb-2">
-              <div className="col-md-3">
-                <h2 className="dark fw-bold mb-0">
-                  Hello {session?.user?.userName} 👋🏻!
-                </h2>
-              </div>
-              <div className="col-md-6 d-flex gap-2">
+            <div className="d-flex flex-column flex-md-row justify-content-start align-items-start mb-2">
+              <h2 className="dark fw-bold mb-0 me-5">
+                Hello {session?.user?.userName} 👋🏻!
+              </h2>
+              <div className="buttons d-flex flex-md-row gap-2">
                 <button
                   type="button"
                   className="btn-custom d-flex align-items-center gap-2"
@@ -179,9 +177,10 @@ function Home(props) {
             </div>
           </div>
         ) : (
-          <div className="cards-container">
-            <Cards cards={props.cards} />
-          </div>
+          <Cards
+            userCards={props.cards}
+            handleScanModalCard={handleScanModal}
+          />
         )}
       </div>
       {scanModalOpen && (
@@ -193,6 +192,15 @@ function Home(props) {
           <div className="custom-modal">
             <div className="custom-modal-header">
               <h2 className="title coloured m-0 fw-bold fs-2">Scan QR Code</h2>
+              <button
+                type="button"
+                className="btn-custom"
+                onClick={() => {
+                  handleScanModal("close");
+                }}
+              >
+                Close
+              </button>
             </div>
             <div className="custom-modal-body">
               <Scanner

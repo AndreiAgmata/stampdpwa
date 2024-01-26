@@ -1,0 +1,12 @@
+.topbar-section{
+    position: fixed;
+    width: 100%;
+
+    @media (min-width : 767px){
+        display: none;
+    }
+    
+    h1{
+        color: #6e72fc;
+    }
+}

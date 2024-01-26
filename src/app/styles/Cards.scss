@@ -1,4 +1,58 @@
 .cards-wrapper{
+   @media (max-width : 767px)
+   {
+    margin-top: 4rem;
+   }
+    
+    .react-card-front{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .react-card-back{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    // .swiper-3d{
+    //     background: #f4f4f4;
+    // }
+
+    .swiper-slide-shadow{
+       opacity: 0 !important;
+    }
+
+    .swiper-pagination{
+        margin-top: 1rem;
+        height: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.35rem;
+
+        span{
+            text-align: center;
+            background-color: #707070;
+            width: 0.65rem;
+            height: 0.65rem;
+            border-radius: 100%;
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.2);
+        }
+          
+        .swiper-pagination-bullet-active {
+            color: #fff;
+            background: #6e72fc;
+        }    
+    }
+    
+     
+    
+
+    
     
     .card-custom{
         width: 17rem;
@@ -8,6 +62,30 @@
         border-radius: 1rem;
         box-shadow: 0px 0px 6px #8888882d;
         padding: 1.5rem;
+        position: relative;
+
+        .dropdown{
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+           
+        }
+        
+        .dropdown-menu{
+            margin-top: 0.5rem !important;
+            padding-inline: 1rem;
+
+            .dropdown-item{
+                display: flex;
+
+                align-items: center;
+
+                &:hover{
+                    background-color: transparent;
+                }
+            }
+        }
+    
 
         .logo-container{
             width: 5.5rem;
@@ -30,17 +108,11 @@
         }
 
         .stamps{
-            // display: flex;
-            // flex-direction: row;
-            // flex-wrap: wrap;
-            // justify-content: space-evenly;
-            // align-items: center;
-            // gap: 1rem;
+
 
             .stamp{
                 height: 3rem;
                 width: 3rem;
-                // border-radius: 100%;
                 background-color: #dddddd;
             }
 
