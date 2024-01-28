@@ -76,6 +76,7 @@ function Login() {
               Start collecting rewards with{" "}
               <span className="span-text">stampd</span>
             </h2>
+            <h2 className="d-block d-sm-none">Log In</h2>
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col mb-3">

@@ -3,11 +3,15 @@ import { useSession } from "next-auth/react";
 import "../styles/Home.scss";
 import { FaSearch } from "react-icons/fa";
 import { IoQrCode } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Scanner from "./Scanner";
 import "../styles/Modal.scss";
 import Cards from "./Cards";
 import { useRouter } from "next/navigation";
+import { Power3 } from "gsap";
+import gsap from "gsap";
+
+import { IoClose } from "react-icons/io5";
 
 function Home(props) {
   const router = useRouter();
@@ -16,16 +20,34 @@ function Home(props) {
   const [searchString, setSearchString] = useState("");
   const [scanTrigger, setScanTrigger] = useState("");
   const [scanModalOpen, setScanModalOpen] = useState(false);
-  const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(true);
+
+  //animations
+  const tl = new gsap.timeline();
+  let searchModalRef = useRef();
+  let scanModalRef = useRef();
 
   const handleScanModal = (action) => {
     if (action === "open") {
       setScanModalOpen(true);
+      if (window.innerWidth <= 767) {
+        tl.to(scanModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
+      } else {
+        tl.to(scanModalRef, 0.5, { y: "-25%", ease: Power3.easeInOut });
+      }
       setTimeout(function () {
         setScanTrigger("open");
       }, 1);
     } else if (action === "close") {
       setScanModalOpen(false);
+      if (window.innerWidth <= 767) {
+        tl.to(scanModalRef, 0.3, {
+          y: "100%",
+          ease: Power3.easeInOut,
+        });
+      } else {
+        tl.to(scanModalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
+      }
       setTimeout(function () {
         setScanTrigger("");
       }, 1);
@@ -34,9 +56,24 @@ function Home(props) {
 
   const handleSearchModal = (action) => {
     if (action === "open") {
-      setSearchModalOpen(true);
+      // setSearchModalOpen(true);
+      if (window.innerWidth <= 767) {
+        tl.to(searchModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
+      } else {
+        tl.to(searchModalRef, 0.3, {
+          y: "-25%",
+          ease: Power3.easeInOut,
+        });
+      }
     } else if (action === "close") {
-      setSearchModalOpen(false);
+      if (window.innerWidth <= 767) {
+        tl.to(searchModalRef, 0.3, {
+          y: "100%",
+          ease: Power3.easeInOut,
+        });
+      } else {
+        tl.to(searchModalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
+      }
     }
   };
 
@@ -90,7 +127,7 @@ function Home(props) {
         <div className="header d-none d-sm-block">
           {props.cards.length !== 0 ? (
             <div className="d-flex flex-column flex-md-row justify-content-start align-items-start mb-2">
-              <h2 className="dark fw-bold mb-0 me-5">
+              <h2 className="dark fw-bold mb-0 me-3">
                 Hello {session?.user?.userName} 👋🏻!
               </h2>
               <div className="buttons d-flex flex-md-row gap-2">
@@ -118,7 +155,7 @@ function Home(props) {
             </div>
           ) : (
             <div className="row d-flex align-items-center mb-2">
-              <div className="col-md-3">
+              <div>
                 <h2 className="dark fw-bold mb-0">
                   Hello {session?.user?.userName} 👋🏻!
                 </h2>
@@ -134,103 +171,117 @@ function Home(props) {
           )}
         </div>
         {props.cards.length === 0 ? (
-          <div className="row no-card-container">
-            <div className="col-md-6 mock-card">
-              <div className="logo"></div>
-              <div className="text"></div>
-              <div className="stamps">
-                <div className="stamp"></div>
-                <div className="stamp"></div>
-                <div className="stamp"></div>
-                <div className="stamp"></div>
-                <div className="stamp"></div>
-                <div className="stamp"></div>
+          <>
+            <Cards
+              userCards={props.cards}
+              handleSearchModalCard={handleSearchModal}
+              handleScanModalCard={handleScanModal}
+              className="d-block d-sm-none"
+            />
+            <div className="row no-card-container d-none d-sm-flex">
+              <div className="col-md-6 mock-card">
+                <div className="logo"></div>
+                <div className="text"></div>
+                <div className="stamps">
+                  <div className="stamp"></div>
+                  <div className="stamp"></div>
+                  <div className="stamp"></div>
+                  <div className="stamp"></div>
+                  <div className="stamp"></div>
+                  <div className="stamp"></div>
+                </div>
+              </div>
+              <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                <h2>Add a Card</h2>
+                <button
+                  type="button"
+                  className="btn-custom mb-3 d-flex justify-content-center align-items-center gap-1 no-card"
+                  onClick={() => {
+                    handleSearchModal("open");
+                  }}
+                >
+                  <FaSearch />
+                  Search
+                </button>
+                <button
+                  type="button"
+                  className="btn-custom mb-3 d-flex justify-content-center align-items-center gap-1 no-card"
+                  onClick={() => {
+                    handleScanModal("open");
+                  }}
+                >
+                  <IoQrCode />
+                  Scan QR Code
+                </button>
+                <img
+                  src="/arrow.png"
+                  alt="arrow"
+                  className="align-self-start w-50"
+                />
               </div>
             </div>
-            <div className="col-md-3 d-flex flex-column justify-content-center align-items-center">
-              <h2>Add a Card</h2>
-              <button
-                type="button"
-                className="btn-custom mb-3 d-flex justify-content-center align-items-center gap-1 no-card"
-                onClick={() => {
-                  handleSearchModal("open");
-                }}
-              >
-                <FaSearch />
-                Search
-              </button>
-              <button
-                type="button"
-                className="btn-custom mb-3 d-flex justify-content-center align-items-center gap-1 no-card"
-                onClick={() => {
-                  handleScanModal("open");
-                }}
-              >
-                <IoQrCode />
-                Scan QR Code
-              </button>
-              <img
-                src="/arrow.png"
-                alt="arrow"
-                className="align-self-start w-50"
-              />
-            </div>
-          </div>
+          </>
         ) : (
           <Cards
             userCards={props.cards}
+            handleSearchModalCard={handleSearchModal}
             handleScanModalCard={handleScanModal}
           />
         )}
       </div>
-      {scanModalOpen && (
-        <>
-          <div
-            className="custom-modal-background"
-            onClick={handleCloseModal}
-          ></div>
-          <div className="custom-modal">
-            <div className="custom-modal-header">
-              <h2 className="title coloured m-0 fw-bold fs-2">Scan QR Code</h2>
-              <button
-                type="button"
-                className="btn-custom"
-                onClick={() => {
-                  handleScanModal("close");
-                }}
-              >
-                Close
-              </button>
-            </div>
-            <div className="custom-modal-body">
+
+      <>
+        <div
+          className="custom-modal-background"
+          onClick={handleCloseModal}
+        ></div>
+        <div className="custom-modal" ref={(el) => (scanModalRef = el)}>
+          <div className="custom-modal-header d-flex justify-content-between align-align-items-center">
+            <h2 className="title coloured m-0 fw-bold fs-2  ">
+              Scan QR Code Add
+            </h2>
+            <IoClose
+              size={"2em"}
+              color="#393939"
+              onClick={() => handleScanModal("close")}
+            />
+          </div>
+          <div className="custom-modal-body">
+            {scanModalOpen && (
               <Scanner
                 triggerScan={scanTrigger}
                 onQRCodeScanned={handleQRCodeScanned}
               />
-            </div>
-            <div className="custom-modal-footer d-flex justify-content-end">
-              <button
-                type="button"
-                className="btn-custom"
-                onClick={() => {
-                  handleScanModal("close");
-                }}
-              >
-                Close
-              </button>
-            </div>
+            )}
           </div>
-        </>
-      )}
+          <div className="custom-modal-footer d-flex justify-content-end">
+            <button
+              type="button"
+              className="btn-custom"
+              onClick={() => {
+                handleScanModal("close");
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </>
+
       {searchModalOpen && (
         <>
           <div
             className="custom-modal-background"
             onClick={handleCloseModal}
           ></div>
-          <div className="custom-modal">
-            <div className="custom-modal-header">
+          <div className="custom-modal" ref={(el) => (searchModalRef = el)}>
+            <div className="custom-modal-header d-flex justify-content-between align-items-center">
               <h2 className="title coloured m-0 fw-bold fs-2">Search</h2>
+              <IoClose
+                size={"2em"}
+                color="#393939"
+                onClick={() => handleSearchModal("close")}
+              />
             </div>
             <div className="custom-modal-body p-3">
               <div className="row">
@@ -249,16 +300,22 @@ function Home(props) {
                     key={index}
                     className="list-item d-flex justify-content-start align-items-center gap-3 mb-3 p-2 rounded border border-secondary-subtle"
                   >
-                    <img
-                      src={business.cardLogoUrl}
-                      alt="business logo"
-                      style={{
-                        height: "50px",
-                        width: "50px",
-                        backgroundColor: "black",
-                      }}
-                      className="rounded-circle"
-                    ></img>
+                    <div
+                      className="logo-container rounded-circle"
+                      style={{ height: "5.5rem", width: "5.5rem" }}
+                    >
+                      <img
+                        src={business.cardLogoUrl}
+                        alt="business logo"
+                        style={{
+                          height: "100%",
+                          width: "100%",
+                          backgroundColor: "black",
+                          objectFit: "cover",
+                        }}
+                      ></img>
+                    </div>
+
                     <div className="col">
                       <h5 className="m-0 text-dark">
                         {" "}

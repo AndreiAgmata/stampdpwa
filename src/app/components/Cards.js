@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import Image from "next/image";
 import "../styles/Cards.scss";
@@ -15,25 +15,37 @@ import { Pagination } from "swiper/modules";
 
 import { RiDeleteBin6Line } from "react-icons/ri";
 
+import { FaSearch } from "react-icons/fa";
+import { IoQrCode } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+
+import gsap from "gsap";
+import { Power3 } from "gsap";
+
 function Cards(props) {
-  const { userCards, handleScanModalCard } = props;
+  const { userCards, handleSearchModalCard, handleScanModalCard } = props;
   const router = useRouter();
   const [cards, setCards] = useState(userCards);
   const [scanTrigger, setScanTrigger] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false); //change to true after debugging
   const [stampDetails, setStampDetails] = useState({});
+
+  let modalRef = useRef();
+  let tl = new gsap.timeline();
 
   //CALLBACKS
   const openScanModal = () => {
     handleScanModalCard("open");
   };
 
+  const openSearchModal = () => {
+    handleSearchModalCard("open");
+  };
   //
 
   const handleDelete = async (id) => {
     try {
       const res = await fetch(`/api/cards/${id}`, { method: "DELETE" });
-
       if (!res.ok) {
         console.log("An error occurred");
       } else {
@@ -62,12 +74,28 @@ function Cards(props) {
     if (action === "open") {
       setStampDetails({ ...stampDetails, cardId: id, businessId: businessId });
       setModalOpen(true);
+      if (window.innerWidth <= 767) {
+        tl.to(modalRef, 0.3, { y: 0, ease: Power3.easeInOut });
+      } else {
+        tl.to(modalRef, 0.3, {
+          y: "-25%",
+          ease: Power3.easeInOut,
+        });
+      }
       setTimeout(function () {
         setScanTrigger("open");
       }, 1);
     } else if (action === "close") {
       setStampDetails({});
       setModalOpen(false);
+      if (window.innerWidth <= 767) {
+        tl.to(modalRef, 0.3, {
+          y: "100%",
+          ease: Power3.easeInOut,
+        });
+      } else {
+        tl.to(modalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
+      }
       setTimeout(function () {
         setScanTrigger("");
       }, 1);
@@ -172,55 +200,90 @@ function Cards(props) {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + "</span>";
+      if (index === 0) {
+        return (
+          '<span class="' +
+          className +
+          ' add-bullet" >' +
+          "<p>[+]</p>" +
+          "</span>"
+        );
+      } else {
+        return '<span class="' + className + '">' + "</span>";
+      }
     },
   };
 
   return (
     <>
-      {modalOpen && (
-        <>
-          <div
-            className="custom-modal-background"
-            onClick={() => handleScanModal("close")}
-          ></div>
-          <div className="custom-modal">
-            <div className="custom-modal">
-              <div className="custom-modal-header">
-                <h2 className="title coloured m-0 fw-bold fs-2">
-                  Scan QR Code
-                </h2>
-              </div>
-              <div className="custom-modal-body">
-                <Scanner
-                  triggerScan={scanTrigger}
-                  onQRCodeScanned={handleQRCodeScanned}
-                />
-              </div>
-              <div className="custom-modal-footer d-flex justify-content-end">
-                <button
-                  type="button"
-                  className="btn-custom"
-                  onClick={() => handleScanModal("close")}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
+      <>
+        <div
+          className="custom-modal-background"
+          onClick={() => handleScanModal("close")}
+        ></div>
+
+        <div className="custom-modal" ref={(el) => (modalRef = el)}>
+          <div className="custom-modal-header d-flex justify-content-between align-items-center">
+            <h2 className="title coloured m-0 fw-bold fs-2">Scan QR Code</h2>
+            <IoClose
+              size={"2em"}
+              color="#393939"
+              onClick={() => handleScanModal("close")}
+            />
           </div>
-        </>
-      )}
+          <div className="custom-modal-body">
+            {modalOpen && (
+              <Scanner
+                triggerScan={scanTrigger}
+                onQRCodeScanned={handleQRCodeScanned}
+              />
+            )}
+          </div>
+          <div className="custom-modal-footer d-flex justify-content-end"></div>
+        </div>
+      </>
+
       {/* MOBILE VIEW */}
-      <button className="btn-custom" type="button" onClick={openScanModal}>
-        Add card
-      </button>
+
       <div className="cards-wrapper d-flex d-sm-none align-items-center justify-content-center ">
         <Swiper
           effect={"cards"}
           pagination={pagination}
           grabCursor={true}
           modules={[EffectCards, Pagination]}
+          initialSlide={props.userCards.length === 0 ? 0 : 1}
         >
+          <SwiperSlide>
+            <div className="react-card-front ">
+              <div className="add-card d-flex flex-column justify-content-center align-items-center">
+                <Image
+                  src={"/Mobile-Assets/add-card.svg"}
+                  alt="add card"
+                  height={70}
+                  width={70}
+                ></Image>
+                <p>Add a card</p>
+                <button
+                  className="btn-custom mb-2"
+                  type="button"
+                  style={{ width: "13rem" }}
+                  onClick={openSearchModal}
+                >
+                  <FaSearch className="me-2" />
+                  Search
+                </button>
+                <button
+                  className="btn-custom"
+                  type="button"
+                  style={{ width: "13rem" }}
+                  onClick={openScanModal}
+                >
+                  <IoQrCode className="me-2" />
+                  Scan QR Code
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
           {cards.map((card, index) => (
             <SwiperSlide key={index}>
               <ReactCardFlip
@@ -242,7 +305,7 @@ function Cards(props) {
                 >
                   <div className="dropdown">
                     <a
-                      href="#"
+                      href=""
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                       style={{ outline: "none" }}
@@ -515,7 +578,7 @@ function Cards(props) {
             >
               <div className="dropdown dropstart">
                 <a
-                  href="#"
+                  href=""
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                   style={{ outline: "none" }}
@@ -544,12 +607,16 @@ function Cards(props) {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a
+                      className="dropdown-item"
+                      href=""
+                      onClick={() => handleDelete(card._id)}
+                    >
                       <RiDeleteBin6Line
                         color="red"
                         size="1.5em"
                         className="me-2"
-                      />{" "}
+                      />
                       <p className="m-0">Delete Card</p>
                     </a>
                   </li>

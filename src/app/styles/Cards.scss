@@ -1,7 +1,7 @@
 .cards-wrapper{
    @media (max-width : 767px)
    {
-    margin-top: 4rem;
+    margin-top: 6rem;
    }
     
     .react-card-front{
@@ -15,10 +15,6 @@
         justify-content: center;
         align-items: center;
     }
-    
-    // .swiper-3d{
-    //     background: #f4f4f4;
-    // }
 
     .swiper-slide-shadow{
        opacity: 0 !important;
@@ -33,6 +29,22 @@
         align-items: center;
         gap: 0.35rem;
 
+        .add-bullet{
+            background-color: transparent !important;
+            width: 1rem !important;
+            height: 1rem !important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p{
+                color: #707070 !important;
+                margin: 0;
+                font-weight: 800;
+                font-size: 0.65rem;
+            }
+        }
+
         span{
             text-align: center;
             background-color: #707070;
@@ -41,28 +53,46 @@
             border-radius: 100%;
             opacity: 1;
             background: rgba(0, 0, 0, 0.2);
+            
         }
+
+       
           
         .swiper-pagination-bullet-active {
-            color: #fff;
             background: #6e72fc;
+            p{
+                color: #6e72fc !important;
+            }
         }    
     }
-    
-     
-    
 
-    
-    
-    .card-custom{
+    .add-card{
         width: 17rem;
         height: 28rem;
-        background-color: white;
-        border: 1px solid #d3d3d3da;
+        background-color: rgba(255, 255, 255, 0.954);
+        border: 2px dashed rgba(211, 211, 211, 0.858);
         border-radius: 1rem;
         box-shadow: 0px 0px 6px #8888882d;
         padding: 1.5rem;
         position: relative;
+
+        p{ 
+            color: #a6a6a6;
+        }
+        
+    }
+
+    .card-custom{
+        width: 17rem;
+        height: 28rem;
+        background-color: white;
+        // border: 1px solid #d3d3d3da;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 6px #8888882d;
+        padding: 1.5rem;
+        position: relative;
+
+        
 
         .dropdown{
             position: absolute;
@@ -89,8 +119,7 @@
 
         .logo-container{
             width: 5.5rem;
-            height: 5.5rem;
-            
+            height: 5.5rem;   
         }
 
         .logo{

@@ -4,7 +4,7 @@ import { signOut } from "next-auth/react";
 import "../styles/SideBar.scss";
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
+import { IoGiftOutline } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 import { IoIosHelpCircle } from "react-icons/io";
 
@@ -20,8 +20,8 @@ function SideBar() {
             Home
           </Link>
           <Link href={""}>
-            <FaSearch size={"1.25em"} />
-            Explore
+            <IoGiftOutline size={"1.5em"} />
+            Rewards
           </Link>
           <Link href={""}>
             <MdAccountCircle size={"1.5em"} />
