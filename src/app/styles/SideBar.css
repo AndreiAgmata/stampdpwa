@@ -1,0 +1,21 @@
+.sideBar-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18rem;
+  height: 100vh;
+  background: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+@media (max-width: 767px) {
+  .sideBar-section {
+    display: none;
+  }
+}
+.sideBar-section a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}/*# sourceMappingURL=SideBar.css.map */

@@ -155,6 +155,14 @@
             }
         }
 
+        .claim-reward-btn{
+            width: 9rem;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
 
         .links{
             display: flex;

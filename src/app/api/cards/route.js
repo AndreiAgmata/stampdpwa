@@ -3,7 +3,6 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "../../../../lib/mongodb";
 import User from "../../../../models/user";
-import Cards from "@/app/components/Cards";
 
 export async function GET() {
   const session = await getServerSession(authOptions);

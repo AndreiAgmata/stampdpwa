@@ -85,7 +85,7 @@ function Register() {
         <h1 className="coloured">stampd</h1>
       </div>
       <div className="container mt-5">
-        <div className="row">
+        <div className="row d-flex gap-5">
           <div className="col d-flex flex-column justify-content-center ">
             <h2>Start collecting rewards, Register now! </h2>
             <form onSubmit={handleSubmit}>
@@ -131,7 +131,7 @@ function Register() {
                     onChange={handleChange}
                   />
                   {emailError && (
-                    <div className="form-text">
+                    <div className="form-text text-danger">
                       This Email Address is already in use.
                     </div>
                   )}

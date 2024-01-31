@@ -18,19 +18,26 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaSearch } from "react-icons/fa";
 import { IoQrCode } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
+import { FaGift } from "react-icons/fa6";
 
 import gsap from "gsap";
 import { Power3 } from "gsap";
+
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 function Cards(props) {
   const { userCards, handleSearchModalCard, handleScanModalCard } = props;
   const router = useRouter();
   const [cards, setCards] = useState(userCards);
   const [scanTrigger, setScanTrigger] = useState("");
-  const [modalOpen, setModalOpen] = useState(false); //change to true after debugging
+  const [modalOpen, setModalOpen] = useState(false);
   const [stampDetails, setStampDetails] = useState({});
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [redeemed, setRedeemed] = useState(false);
 
-  let modalRef = useRef();
+  let addStampModalRef = useRef();
+  let claimRewardModalRef = useRef();
+  let voucherModalRef = useRef();
   let tl = new gsap.timeline();
 
   //CALLBACKS
@@ -75,9 +82,9 @@ function Cards(props) {
       setStampDetails({ ...stampDetails, cardId: id, businessId: businessId });
       setModalOpen(true);
       if (window.innerWidth <= 767) {
-        tl.to(modalRef, 0.3, { y: 0, ease: Power3.easeInOut });
+        tl.to(addStampModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
       } else {
-        tl.to(modalRef, 0.3, {
+        tl.to(addStampModalRef, 0.3, {
           y: "-25%",
           ease: Power3.easeInOut,
         });
@@ -89,12 +96,12 @@ function Cards(props) {
       setStampDetails({});
       setModalOpen(false);
       if (window.innerWidth <= 767) {
-        tl.to(modalRef, 0.3, {
+        tl.to(addStampModalRef, 0.3, {
           y: "100%",
           ease: Power3.easeInOut,
         });
       } else {
-        tl.to(modalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
+        tl.to(addStampModalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
       }
       setTimeout(function () {
         setScanTrigger("");
@@ -125,6 +132,97 @@ function Cards(props) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleClaimModal = async (card, action) => {
+    if (action === "open") {
+      setSelectedCard(card);
+      if (window.innerWidth <= 767) {
+        tl.to(claimRewardModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
+      } else {
+        tl.to(claimRewardModalRef, 0.3, {
+          y: "-25%",
+          ease: Power3.easeInOut,
+        });
+      }
+    } else if (action === "close") {
+      setSelectedCard(null);
+      if (window.innerWidth <= 767) {
+        tl.to(claimRewardModalRef, 0.3, {
+          y: "100%",
+          ease: Power3.easeInOut,
+        });
+      } else {
+        tl.to(claimRewardModalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
+      }
+    } else if (action === "redeem") {
+      if (window.innerWidth <= 767) {
+        tl.to(claimRewardModalRef, 0.3, {
+          y: "100%",
+          ease: Power3.easeInOut,
+        });
+        handleVoucherModal("open");
+      } else {
+        tl.to(claimRewardModalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
+        handleVoucherModal("open");
+      }
+    }
+  };
+
+  const handleVoucherModal = async (action) => {
+    if (action === "open") {
+      handleClaimVoucher();
+      setRedeemed(true);
+      if (window.innerWidth <= 767) {
+        tl.to(voucherModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
+      } else {
+        tl.to(voucherModalRef, 0.3, {
+          y: "-25%",
+          ease: Power3.easeInOut,
+        });
+      }
+    } else if (action === "close") {
+      setRedeemed(false);
+      setSelectedCard(null);
+      if (window.innerWidth <= 767) {
+        tl.to(voucherModalRef, 0.3, {
+          y: "100%",
+          ease: Power3.easeInOut,
+        });
+      } else {
+        tl.to(voucherModalRef, 0.3, { y: "100%", ease: Power3.easeInOut });
+      }
+      router.refresh();
+    }
+  };
+
+  const handleClaimVoucher = async () => {
+    try {
+      const res = await fetch("/api/rewards", {
+        method: "POST",
+        body: JSON.stringify(selectedCard),
+      });
+
+      if (!res.ok) {
+        console.log("An error occurred");
+      } else {
+        console.log("Reward Claimed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const renderTime = ({ remainingTime }) => {
+    return (
+      <div className="timer">
+        <div className="text-dark">Expires in: </div>
+        <div className="value text-dark text-center fw-bold fs-1">
+          {remainingTime}
+        </div>
+        <div className="text-dark">seconds</div>
+      </div>
+    );
   };
 
   const renderStamps = (card) => {
@@ -221,8 +319,7 @@ function Cards(props) {
           className="custom-modal-background"
           onClick={() => handleScanModal("close")}
         ></div>
-
-        <div className="custom-modal" ref={(el) => (modalRef = el)}>
+        <div className="custom-modal" ref={(el) => (addStampModalRef = el)}>
           <div className="custom-modal-header d-flex justify-content-between align-items-center">
             <h2 className="title coloured m-0 fw-bold fs-2">Scan QR Code</h2>
             <IoClose
@@ -243,9 +340,105 @@ function Cards(props) {
         </div>
       </>
 
+      <>
+        <div
+          className="custom-modal-background"
+          onClick={() => handleClaimModal(null, "close")}
+        ></div>
+        <div className="custom-modal" ref={(el) => (claimRewardModalRef = el)}>
+          <div className="custom-modal-header d-flex justify-content-between align-items-center">
+            <h2 className="title coloured m-0 fw-bold fs-2">Claim Reward</h2>
+            <IoClose
+              size={"2em"}
+              color="#393939"
+              onClick={() => handleClaimModal(null, "close")}
+            />
+          </div>
+          <div className="custom-modal-body p-3 d-flex flex-column justify-content-start justify-content-sm-center align-items-center">
+            <FaGift
+              size={"5em"}
+              color="#393939"
+              className="mb-3 mt-4 mt-sm-0"
+            />
+            <h2 className="dark fw-bold ">
+              {selectedCard?.cardRef.businessName}
+            </h2>
+            <h5 className="dark text-center">
+              Do you want to redeem this reward now?
+            </h5>
+            <p>Your reward voucher will only be available for</p>
+            <p className="fs-4">
+              <b>60 seconds</b>
+            </p>
+            <p className="text-center">
+              After the alloted time, your voucher will be removed.
+            </p>
+            <p className="text-center">
+              Please wait until you are at the business location before pressing
+              Redeem.
+            </p>
+            <button
+              type="button"
+              className="btn-custom"
+              onClick={() => handleClaimModal(null, "redeem")}
+            >
+              Redeem
+            </button>
+          </div>
+          <div className="custom-modal-footer d-flex justify-content-end"></div>
+        </div>
+      </>
+
+      <>
+        <div
+          className="custom-modal-background"
+          onClick={() => handleVoucherModal("close")}
+        ></div>
+        <div className="custom-modal" ref={(el) => (voucherModalRef = el)}>
+          <div className="custom-modal-header d-flex justify-content-between align-items-center">
+            <h2 className="title coloured m-0 fw-bold fs-2">Reward Voucher</h2>
+            <IoClose
+              size={"2em"}
+              color="#393939"
+              onClick={() => handleVoucherModal("close")}
+            />
+          </div>
+          <div className="custom-modal-body p-3 d-flex flex-column justify-content-start justify-content-sm-center align-items-center">
+            <h2 className="dark fw-medium m-0 fs-4">
+              Thank you for your loyalty with:
+            </h2>
+            <h2 className="dark fw-bold mb-3">
+              {selectedCard?.cardRef.businessName}
+            </h2>
+            <p className="text-center text-dark">
+              Please show this reward voucher to <br /> claim your reward.
+            </p>
+            {redeemed && (
+              <CountdownCircleTimer
+                isPlaying
+                duration={60}
+                colors={["#6e72fc", "#ad1deb", "#6e72fc", "#ad1deb"]}
+                colorsTime={[60, 40, 20, 0]}
+                className="text-dark"
+              >
+                {renderTime}
+              </CountdownCircleTimer>
+            )}
+            <button
+              className="btn-custom w-100 mt-5"
+              type="button"
+              onClick={() => handleVoucherModal("close")}
+            >
+              Complete
+            </button>
+          </div>
+          <div className="custom-modal-footer d-flex justify-content-end"></div>
+        </div>
+      </>
+
       {/* MOBILE VIEW */}
 
-      <div className="cards-wrapper d-flex d-sm-none align-items-center justify-content-center ">
+      <div className="cards-wrapper d-flex d-sm-none align-items-center justify-content-center">
         <Swiper
           effect={"cards"}
           pagination={pagination}
@@ -391,6 +584,17 @@ function Cards(props) {
                       />
                     </g>
                   </svg>
+                  {card.currentNumStamps === card.cardRef.numberOfStamps && (
+                    <div
+                      className="claim-reward-btn p-2 rounded-top-3"
+                      style={{ backgroundColor: "white" }}
+                      onClick={() => handleClaimModal(card, "open")}
+                    >
+                      <p className="text-dark m-0 fw-bold text-center">
+                        Claim Reward
+                      </p>
+                    </div>
+                  )}
                 </div>
                 <div
                   className="card-custom d-flex flex-column justify-content-start align-items-center"
@@ -665,6 +869,17 @@ function Cards(props) {
                   />
                 </g>
               </svg>
+              {card.currentNumStamps === card.cardRef.numberOfStamps && (
+                <div
+                  className="claim-reward-btn p-2 rounded-top-3"
+                  style={{ backgroundColor: "white" }}
+                  onClick={() => handleClaimModal(card, "open")}
+                >
+                  <p className="text-dark m-0 fw-bold text-center">
+                    Claim Reward
+                  </p>
+                </div>
+              )}
             </div>
             <div
               className="card-custom d-flex flex-column justify-content-start align-items-center"

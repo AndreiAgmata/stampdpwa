@@ -18,14 +18,17 @@
 .custom-modal{
     position: fixed;
     bottom: 0;
-    // bottom: 50%;
     left: 50%;
     transform: translate(-50%, 100%);
-    // transform: translate(-50%, 50%);
     background-color: white;
     border-radius: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.174);
     z-index: 999;
+
+    //FOR LAYOUT PURPOSES
+    // bottom: 50%;
+    // left: 50%;
+    // transform: translate(-50%, 50%);
 
 
     @media (max-width : 767px){

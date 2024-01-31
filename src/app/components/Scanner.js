@@ -8,14 +8,10 @@ const Scanner = ({ triggerScan, onQRCodeScanned }) => {
 
   const scan = useCallback(
     (action) => {
-      console.log("here");
-
       if (action === "close" && scannerRef.current?.getState() === 1) {
         return;
       }
-
       if (!scannerRef.current?.getState()) {
-        console.log("starting scanner");
         scannerRef.current = new Html5Qrcode("reader");
         const config = { fps: 10, qrbox: { width: 250, height: 250 } };
         const qrCodeSuccessCallback = (decodedText) => {

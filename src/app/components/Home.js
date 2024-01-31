@@ -21,7 +21,6 @@ function Home(props) {
   const [scanTrigger, setScanTrigger] = useState("");
   const [scanModalOpen, setScanModalOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(true);
-
   //animations
   const tl = new gsap.timeline();
   let searchModalRef = useRef();
@@ -237,9 +236,7 @@ function Home(props) {
         ></div>
         <div className="custom-modal" ref={(el) => (scanModalRef = el)}>
           <div className="custom-modal-header d-flex justify-content-between align-align-items-center">
-            <h2 className="title coloured m-0 fw-bold fs-2  ">
-              Scan QR Code Add
-            </h2>
+            <h2 className="title coloured m-0 fw-bold fs-2  ">Scan QR Code</h2>
             <IoClose
               size={"2em"}
               color="#393939"

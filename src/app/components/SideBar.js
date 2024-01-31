@@ -15,7 +15,7 @@ function SideBar() {
       <div className="container d-flex flex-column justify-content-center mt-5">
         <h1 className="title mb-4">stampd</h1>
         <div className="links col ms-4 d-flex flex-column gap-4 justify-content-start align-items-start">
-          <Link href={""}>
+          <Link href={"/home"}>
             <FaHome size={"1.5em"} />
             Home
           </Link>
@@ -23,7 +23,7 @@ function SideBar() {
             <IoGiftOutline size={"1.5em"} />
             Rewards
           </Link>
-          <Link href={""}>
+          <Link href={"/account"}>
             <MdAccountCircle size={"1.5em"} />
             My Account
           </Link>

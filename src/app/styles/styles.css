@@ -1,0 +1,53 @@
+.coloured {
+  background: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+.dark {
+  color: #393939;
+}
+
+h2 {
+  color: #393939;
+  font-weight: 600;
+  line-height: 3rem;
+}
+
+form {
+  color: #393939;
+}
+
+.btn-custom {
+  background: linear-gradient(315deg, #6e72fc 0%, #ad1deb 74%);
+  color: white;
+  border-radius: 2rem;
+  padding-inline: 0.85rem;
+  padding-block: 0.475rem;
+  border: 0;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-custom:hover {
+  color: white;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.btn-custom:focus, .btn-custom:active {
+  color: white;
+}
+.btn-custom:disabled {
+  color: white;
+  cursor: not-allowed;
+}
+
+.container {
+  padding-inline: 2rem;
+}/*# sourceMappingURL=styles.css.map */
