@@ -5,7 +5,7 @@ import "../../styles/account/my-account.scss";
 import { useState } from "react";
 
 function MyAccount({ props }) {
-  const [user, setUser] = useState(props);
+  const [user, setUser] = useState(props.user);
   const [running, setRunning] = useState(false);
   const [emailError, setEmailError] = useState(false);
 
@@ -23,36 +23,58 @@ function MyAccount({ props }) {
 
   return (
     <section className="my-account-section">
-      <h1 className="dark">My Account</h1>
+      <h1 className="dark fw-bold">My Account</h1>
       <div className="usage mt-5">
-        <h3 className="dark fw-bold pb-2 border-bottom">Usage</h3>
+        <h3 className="dark fw-medium pb-2 border-bottom">Usage</h3>
         <div className="activity-wrapper pt-1">
           <div className="row">
             <div className="col-12 col-sm-6 d-flex justify-content-evenly align-items-center">
               <div
-                className="border"
+                className="border d-flex flex-column justify-content-center align-items-center"
                 style={{
                   width: " 40%",
                   height: "6rem",
                   backgroundColor: "white",
                   borderRadius: "0.75rem",
                 }}
-              ></div>
+              >
+                <h2
+                  className="m-0"
+                  style={{ fontSize: "2.5rem", color: "#6e72fc" }}
+                >
+                  {props.stampCount}
+                </h2>
+                <p className="dark m-0">Total Stamps</p>
+              </div>
               <div
-                className="border"
+                className="border d-flex flex-column justify-content-center align-items-center"
                 style={{
                   width: " 40%",
                   height: "6rem",
                   backgroundColor: "white",
                   borderRadius: "0.75rem",
                 }}
-              ></div>
+              >
+                <h2
+                  className="m-0"
+                  style={{ fontSize: "2.5rem", color: "#6e72fc" }}
+                >
+                  {props.rewardsCount}
+                </h2>
+                <p className="dark m-0">Total Redeems</p>
+              </div>
+              {/* <p
+                className="dark mt-2 mb-0 text-center"
+                style={{ fontSize: "0.75rem" }}
+              >
+                Data may not reflect recent activity.
+              </p> */}
             </div>
           </div>
         </div>
       </div>
       <div className="personal-details mt-5">
-        <h3 className="dark fw-bold pb-2 border-bottom">Account Details</h3>
+        <h3 className="dark fw-medium pb-2 border-bottom">Account Details</h3>
         <div className="row d-flex gap-5">
           <div className="col d-flex flex-column justify-content-center ">
             <form onSubmit={handleSubmit}>
@@ -118,26 +140,9 @@ function MyAccount({ props }) {
                 </div>
               </div>
               <div className="row">
-                <div className="col-sm-6 mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    placeholder="********"
-                  />
-                  <div className="form-text text-danger text-end text-decoration-underline">
-                    <a>Change Password</a>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
                 <div className="col-12 col-sm-6">
                   <button type="button" className="btn-custom ms-auto">
-                    Update Account
+                    Save Changes
                   </button>
                 </div>
               </div>
@@ -145,10 +150,10 @@ function MyAccount({ props }) {
           </div>
         </div>
       </div>
-      <div className="mt-3">
+      {/* <div className="mt-3">
         <div className="fw-bold pb-2 border-bottom"></div>
         <h3 className="text-dark mt-2">Log Out</h3>
-      </div>
+      </div> */}
     </section>
   );
 }

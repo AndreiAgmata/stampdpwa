@@ -64,7 +64,7 @@ export async function PUT(req, { params }) {
   try {
     const newTransaction = {
       businessId: businessId,
-      clientId: id,
+      clientId: session.user._id,
       transactionType: "Stamp",
     };
     const transaction = await Transaction.create(newTransaction);

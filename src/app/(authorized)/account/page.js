@@ -17,7 +17,7 @@ const getAccountDetails = async () => {
       console.log("An error occurred while fetching user details");
     } else {
       const data = await res.json();
-      return data.user;
+      return data.payload;
     }
   } catch (error) {
     console.log(error);

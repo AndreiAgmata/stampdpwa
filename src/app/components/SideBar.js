@@ -19,7 +19,7 @@ function SideBar() {
             <FaHome size={"1.5em"} />
             Home
           </Link>
-          <Link href={""}>
+          <Link href={"/rewards"}>
             <IoGiftOutline size={"1.5em"} />
             Rewards
           </Link>

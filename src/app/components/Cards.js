@@ -38,6 +38,8 @@ function Cards(props) {
   let addStampModalRef = useRef();
   let claimRewardModalRef = useRef();
   let voucherModalRef = useRef();
+  let scanModalBgRef = useRef();
+  let claimModalBgRef = useRef();
   let tl = new gsap.timeline();
 
   //CALLBACKS
@@ -78,6 +80,11 @@ function Cards(props) {
   };
 
   const handleScanModal = (action, id, businessId) => {
+    tl.to(scanModalBgRef, 0.05, {
+      opacity: 1,
+      zIndex: 999,
+      ease: Power3.easeInOut,
+    });
     if (action === "open") {
       setStampDetails({ ...stampDetails, cardId: id, businessId: businessId });
       setModalOpen(true);
@@ -93,6 +100,11 @@ function Cards(props) {
         setScanTrigger("open");
       }, 1);
     } else if (action === "close") {
+      tl.to(scanModalBgRef, 0.05, {
+        opacity: 0,
+        zIndex: -1,
+        ease: Power3.easeInOut,
+      });
       setStampDetails({});
       setModalOpen(false);
       if (window.innerWidth <= 767) {
@@ -136,6 +148,11 @@ function Cards(props) {
 
   const handleClaimModal = async (card, action) => {
     if (action === "open") {
+      tl.to(claimModalBgRef, 0.05, {
+        opacity: 1,
+        zIndex: 999,
+        ease: Power3.easeInOut,
+      });
       setSelectedCard(card);
       if (window.innerWidth <= 767) {
         tl.to(claimRewardModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
@@ -146,6 +163,11 @@ function Cards(props) {
         });
       }
     } else if (action === "close") {
+      tl.to(claimModalBgRef, 0.05, {
+        opacity: 0,
+        zIndex: -1,
+        ease: Power3.easeInOut,
+      });
       setSelectedCard(null);
       if (window.innerWidth <= 767) {
         tl.to(claimRewardModalRef, 0.3, {
@@ -182,6 +204,11 @@ function Cards(props) {
         });
       }
     } else if (action === "close") {
+      tl.to(claimModalBgRef, 0.05, {
+        opacity: 0,
+        zIndex: -1,
+        ease: Power3.easeInOut,
+      });
       setRedeemed(false);
       setSelectedCard(null);
       if (window.innerWidth <= 767) {
@@ -244,8 +271,8 @@ function Cards(props) {
           >
             <Image
               src="/add-stamp.svg"
-              height={35}
-              width={35}
+              height={40}
+              width={40}
               alt="ad-stamp"
             ></Image>
           </div>
@@ -264,8 +291,8 @@ function Cards(props) {
           >
             <div
               style={{
-                height: "2rem",
-                width: "2rem",
+                height: "3rem",
+                width: "3rem",
                 backgroundColor: card.cardRef.cardTheme,
               }}
               className="rounded-circle"
@@ -317,6 +344,7 @@ function Cards(props) {
       <>
         <div
           className="custom-modal-background"
+          ref={(el) => (scanModalBgRef = el)}
           onClick={() => handleScanModal("close")}
         ></div>
         <div className="custom-modal" ref={(el) => (addStampModalRef = el)}>
@@ -343,7 +371,16 @@ function Cards(props) {
       <>
         <div
           className="custom-modal-background"
-          onClick={() => handleClaimModal(null, "close")}
+          ref={(el) => (claimModalBgRef = el)}
+          onClick={() => {
+            // Your condition here
+            if (!redeemed) {
+              // Execute handleClaimModal with null and "close"
+              handleClaimModal(null, "close");
+            } else {
+              handleVoucherModal("close");
+            }
+          }}
         ></div>
         <div className="custom-modal" ref={(el) => (claimRewardModalRef = el)}>
           <div className="custom-modal-header d-flex justify-content-between align-items-center">
@@ -390,10 +427,6 @@ function Cards(props) {
       </>
 
       <>
-        <div
-          className="custom-modal-background"
-          onClick={() => handleVoucherModal("close")}
-        ></div>
         <div className="custom-modal" ref={(el) => (voucherModalRef = el)}>
           <div className="custom-modal-header d-flex justify-content-between align-items-center">
             <h2 className="title coloured m-0 fw-bold fs-2">Reward Voucher</h2>

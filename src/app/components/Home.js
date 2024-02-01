@@ -25,10 +25,16 @@ function Home(props) {
   const tl = new gsap.timeline();
   let searchModalRef = useRef();
   let scanModalRef = useRef();
+  let modalBgRef = useRef();
 
   const handleScanModal = (action) => {
     if (action === "open") {
       setScanModalOpen(true);
+      tl.to(modalBgRef, 0.1, {
+        opacity: 1,
+        zIndex: 999,
+        ease: Power3.easeInOut,
+      });
       if (window.innerWidth <= 767) {
         tl.to(scanModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
       } else {
@@ -39,6 +45,11 @@ function Home(props) {
       }, 1);
     } else if (action === "close") {
       setScanModalOpen(false);
+      tl.to(modalBgRef, 0.1, {
+        opacity: 0,
+        zIndex: -1,
+        ease: Power3.easeInOut,
+      });
       if (window.innerWidth <= 767) {
         tl.to(scanModalRef, 0.3, {
           y: "100%",
@@ -56,6 +67,11 @@ function Home(props) {
   const handleSearchModal = (action) => {
     if (action === "open") {
       // setSearchModalOpen(true);
+      tl.to(modalBgRef, 0.1, {
+        opacity: 1,
+        zIndex: 999,
+        ease: Power3.easeInOut,
+      });
       if (window.innerWidth <= 767) {
         tl.to(searchModalRef, 0.3, { y: 0, ease: Power3.easeInOut });
       } else {
@@ -65,6 +81,11 @@ function Home(props) {
         });
       }
     } else if (action === "close") {
+      tl.to(modalBgRef, 0.1, {
+        opacity: 0,
+        zIndex: -1,
+        ease: Power3.easeInOut,
+      });
       if (window.innerWidth <= 767) {
         tl.to(searchModalRef, 0.3, {
           y: "100%",
@@ -229,6 +250,12 @@ function Home(props) {
         )}
       </div>
 
+      <div
+        className="custom-modal-background"
+        ref={(el) => (modalBgRef = el)}
+        onClick={handleCloseModal}
+      ></div>
+
       <>
         <div
           className="custom-modal-background"
@@ -267,10 +294,6 @@ function Home(props) {
 
       {searchModalOpen && (
         <>
-          <div
-            className="custom-modal-background"
-            onClick={handleCloseModal}
-          ></div>
           <div className="custom-modal" ref={(el) => (searchModalRef = el)}>
             <div className="custom-modal-header d-flex justify-content-between align-items-center">
               <h2 className="title coloured m-0 fw-bold fs-2">Search</h2>

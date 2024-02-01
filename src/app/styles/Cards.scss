@@ -67,8 +67,8 @@
     }
 
     .add-card{
-        width: 17rem;
-        height: 28rem;
+        width: 19rem;
+        height: 31rem;
         background-color: rgba(255, 255, 255, 0.954);
         border: 2px dashed rgba(211, 211, 211, 0.858);
         border-radius: 1rem;
@@ -83,11 +83,11 @@
     }
 
     .card-custom{
-        width: 17rem;
-        height: 28rem;
+        width: 19rem;
+        height: 31rem;
         background-color: white;
         // border: 1px solid #d3d3d3da;
-        border-radius: 1rem;
+        border-radius: 1.5rem;
         box-shadow: 0px 0px 6px #8888882d;
         padding: 1.5rem;
         position: relative;
@@ -118,8 +118,8 @@
     
 
         .logo-container{
-            width: 5.5rem;
-            height: 5.5rem;   
+            width: 6.5rem;
+            height: 6.5rem;   
         }
 
         .logo{
@@ -130,7 +130,7 @@
         }
 
         h2{
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             text-align: center;
             font-weight: 600;
             line-height: 1.75rem;
@@ -140,8 +140,8 @@
 
 
             .stamp{
-                height: 3rem;
-                width: 3rem;
+                height: 4rem;
+                width: 4rem;
                 background-color: #dddddd;
             }
 
@@ -169,12 +169,12 @@
             flex-direction: column;
 
             .icon{
-                width: 1.25rem;
+                width: 1.5rem;
                 height: auto;
             }
 
             .link-text{
-                font-size: 0.65rem;
+                font-size: 0.85rem;
 
                
             }
