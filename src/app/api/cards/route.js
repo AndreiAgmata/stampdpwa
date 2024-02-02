@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { connectMongoDB } from "../../../../lib/mongodb";
 import User from "../../../../models/user";
 import Business from "../../../../models/business";
+import Card from "../../../../models/card";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -15,25 +16,18 @@ export async function GET() {
 
   try {
     await connectMongoDB();
-    console.log(userId);
 
-    try {
-      const user = await User.findById(userId)
-        .populate({
-          path: "cards.businessRef",
-          model: "Business",
-          select: "activeCardRef",
-          populate: {
-            path: "activeCardRef",
-            model: "Card",
-          },
-        })
-        .select("cards");
-      console.log("fetched user");
-      console.log(user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-    }
+    const user = await User.findById(userId)
+      .populate({
+        path: "cards.businessRef",
+        model: "Business",
+        select: "activeCardRef",
+        populate: {
+          path: "activeCardRef",
+          model: "Card",
+        },
+      })
+      .select("cards");
 
     if (!user) {
       return NextResponse.json(
