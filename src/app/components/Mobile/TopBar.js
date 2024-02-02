@@ -21,10 +21,6 @@ function TopBar() {
   const pathname = usePathname();
   const isHome = pathname === "/home";
 
-  if (!isHome) {
-    return null;
-  }
-
   const [businessList, setBusinessList] = useState();
   const [searchString, setSearchString] = useState("");
   const [scanTrigger, setScanTrigger] = useState("");
@@ -169,6 +165,10 @@ function TopBar() {
 
     getBusinessList();
   }, []);
+
+  if (!isHome) {
+    return null;
+  }
 
   return (
     <>
