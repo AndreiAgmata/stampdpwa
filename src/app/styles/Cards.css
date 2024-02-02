@@ -1,8 +1,3 @@
-@media (max-width: 767px) {
-  .cards-wrapper {
-    margin-top: 6rem;
-  }
-}
 .cards-wrapper .react-card-front {
   display: flex;
   justify-content: center;

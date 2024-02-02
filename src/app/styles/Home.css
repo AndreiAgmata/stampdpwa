@@ -6,8 +6,12 @@
 }
 @media (max-width: 767px) {
   .home-section {
-    padding-top: 6rem;
+    padding-top: 5rem;
+    padding-bottom: 10rem;
     padding-inline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 .home-section p {

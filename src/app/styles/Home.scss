@@ -5,8 +5,12 @@
     height: 100dvh;
 
     @media (max-width: 767px) {
-        padding-top: 6rem;
+        padding-top: 5rem;
+        padding-bottom: 10rem;
         padding-inline: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     p{
