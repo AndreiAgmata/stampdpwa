@@ -68,7 +68,7 @@ function Cards(props) {
 
   const handleFlip = (id) => {
     setCards((prevCards) =>
-      prevCards.map((card) =>
+      prevCards?.map((card) =>
         card._id === id ? { ...card, flip: !card.flip } : card
       )
     );
@@ -510,7 +510,7 @@ function Cards(props) {
               </div>
             </div>
           </SwiperSlide>
-          {cards.map((card, index) => (
+          {cards?.map((card, index) => (
             <SwiperSlide key={index}>
               <ReactCardFlip
                 isFlipped={card.flip}
@@ -795,7 +795,7 @@ function Cards(props) {
 
       {/* MD - LG VIEW */}
       <div className="cards-wrapper d-none d-sm-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-4">
-        {cards.map((card, index) => (
+        {cards?.map((card, index) => (
           <ReactCardFlip
             isFlipped={card.flip}
             flipDirection="horizontal"

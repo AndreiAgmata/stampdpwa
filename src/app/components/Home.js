@@ -315,7 +315,7 @@ function Home(props) {
               </div>
 
               <div className="list">
-                {businessList.map((business, index) => (
+                {businessList?.map((business, index) => (
                   <div
                     key={index}
                     className="list-item d-flex justify-content-start align-items-center gap-3 mb-3 p-2 rounded border border-secondary-subtle"
