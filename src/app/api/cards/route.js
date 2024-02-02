@@ -36,16 +36,11 @@ export async function GET() {
       );
     }
 
-    const cards = [];
-
-    user.cards.forEach((ref) => {
-      const card = {
-        cardRef: ref.businessRef.activeCardRef,
-        currentNumStamps: ref.currentNumStamps,
-        _id: ref._id,
-      };
-      cards.push(card);
-    });
+    const cards = user.cards.map((ref) => ({
+      cardRef: ref.businessRef.activeCardRef,
+      currentNumStamps: ref.currentNumStamps,
+      _id: ref._id,
+    }));
 
     return NextResponse.json({ cards }, { status: 201 });
   } catch (error) {
