@@ -477,7 +477,7 @@ function Cards(props) {
           pagination={pagination}
           grabCursor={true}
           modules={[EffectCards, Pagination]}
-          initialSlide={props.userCards.length === 0 ? 0 : 1}
+          initialSlide={props?.userCards?.length === 0 ? 0 : 1}
         >
           <SwiperSlide>
             <div className="react-card-front ">
