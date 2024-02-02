@@ -8,6 +8,10 @@ export async function GET() {
   const session = await getServerSession(authOptions);
   const userId = session.user._id;
 
+  if (!session) {
+    return NextResponse.json({ message: "Not authorized" }, { status: 401 });
+  }
+
   try {
     await connectMongoDB();
 
@@ -27,7 +31,7 @@ export async function GET() {
     if (!user) {
       return NextResponse.json(
         { message: "Unable to fetch Cards" },
-        { status: 500 }
+        { status: 404 }
       );
     }
 

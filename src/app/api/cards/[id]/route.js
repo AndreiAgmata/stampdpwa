@@ -7,6 +7,7 @@ import User from "../../../../../models/user";
 export async function DELETE(req, { params }) {
   const session = await getServerSession(authOptions);
   const { id } = params;
+
   try {
     await connectMongoDB();
 
