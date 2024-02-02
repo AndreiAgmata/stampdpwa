@@ -3,6 +3,7 @@ import { authOptions } from "../auth/[...nextauth]/route";
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "../../../../lib/mongodb";
 import User from "../../../../models/user";
+import Business from "../../../../models/business";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -14,8 +15,8 @@ export async function GET() {
 
   try {
     await connectMongoDB();
+    console.log("connected to database");
 
-    //get cards array
     const user = await User.findById(userId)
       .populate({
         path: "cards.businessRef",
