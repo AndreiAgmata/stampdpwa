@@ -1,0 +1,14 @@
+.topbar-section {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 5rem;
+}
+@media (min-width: 767px) {
+  .topbar-section {
+    display: none;
+  }
+}
+.topbar-section h1 {
+  color: #6e72fc;
+}/*# sourceMappingURL=TopBar.css.map */

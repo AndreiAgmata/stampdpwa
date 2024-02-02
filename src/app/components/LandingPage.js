@@ -30,7 +30,7 @@ function LandingPage() {
               <p className="hero-description">
                 Say goodbye to missing loyalty cards with our hassle-free,
                 streamlined loyalty program solution. Simplify rewards, no cards
-                needed
+                needed.
               </p>
               <div className="get-app d-flex gap-2">
                 <img src="/ios.svg" alt="download on ios" className="ios"></img>
