@@ -28,16 +28,16 @@
     }
 
     #qr-shaded-region{
-        border-width: 107.5px !important;
-        border-color: #6e73fc5d !important;
+        position: relative;
 
-        @media (max-width : 767px){
-        height: 70% !important;
-        width: 100% !important;
-        border-bottom-width: 180px !important;
-        border-top-width: 180px !important;
-        border-left-width: 90px !important;
-        border-right-width: 90px !important;
+        @media (min-width: 768px) {
+            border: 107.5px solid #6e73fc5d !important;
+        }
+    
+        @media (max-width: 767px) {
+            height: 70%;
+            width: 100%;
+            // border: 20% solid #6e73fc5d !important;
         }
 
     }

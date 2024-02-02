@@ -30,16 +30,16 @@
   }
 }
 #reader #qr-shaded-region {
-  border-width: 107.5px !important;
-  border-color: rgba(110, 115, 252, 0.3647058824) !important;
+  position: relative;
+}
+@media (min-width: 768px) {
+  #reader #qr-shaded-region {
+    border: 107.5px solid rgba(110, 115, 252, 0.3647058824) !important;
+  }
 }
 @media (max-width: 767px) {
   #reader #qr-shaded-region {
-    height: 70% !important;
-    width: 100% !important;
-    border-bottom-width: 180px !important;
-    border-top-width: 180px !important;
-    border-left-width: 90px !important;
-    border-right-width: 90px !important;
+    height: 70%;
+    width: 100%;
   }
 }/*# sourceMappingURL=Scanner.css.map */
