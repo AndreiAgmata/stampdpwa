@@ -1,5 +1,7 @@
+"use client";
 import "@/app/styles/Settings.scss";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 function SettingsPage() {
   return (
@@ -24,6 +26,9 @@ function SettingsPage() {
           Contact Stampd
         </Link>
       </div>
+      <button type="button" className="btn-custom mt-3 w-100" onClick={signOut}>
+        Log Out
+      </button>
     </section>
   );
 }
