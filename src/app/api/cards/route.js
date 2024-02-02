@@ -28,6 +28,8 @@ export async function GET() {
         },
       })
       .select("cards");
+    console.log("fetched user");
+    console.log(user);
 
     if (!user) {
       return NextResponse.json(
