@@ -16,6 +16,7 @@ import { IoClose } from "react-icons/io5";
 function Home(props) {
   const router = useRouter();
   const { data: session } = useSession();
+  const [cards, setCards] = useState(props.cards);
   const [businessList, setBusinessList] = useState(props.businesses);
   const [searchString, setSearchString] = useState("");
   const [scanTrigger, setScanTrigger] = useState("");
@@ -145,7 +146,7 @@ function Home(props) {
     <section className="home-section">
       <div className="container-fluid">
         <div className="header d-none d-sm-block">
-          {props?.cards?.length !== 0 ? (
+          {cards.length !== 0 ? (
             <div className="d-flex flex-column flex-md-row justify-content-start align-items-start mb-2">
               <h2 className="dark fw-bold mb-0 me-3">
                 Hello {session?.user?.userName} 👋🏻!
@@ -182,7 +183,7 @@ function Home(props) {
               </div>
             </div>
           )}
-          {props?.cards?.length !== 0 ? (
+          {cards.length !== 0 ? (
             <p>
               Ready to earn rewards? Scan a QR code and start collecting stamps!
             </p>
@@ -190,10 +191,10 @@ function Home(props) {
             <p>Start collecting rewards by adding a card below.</p>
           )}
         </div>
-        {props?.cards?.length === 0 ? (
+        {cards.length === 0 ? (
           <>
             <Cards
-              userCards={props.cards}
+              userCards={cards}
               handleSearchModalCard={handleSearchModal}
               handleScanModalCard={handleScanModal}
               className="d-block d-sm-none"
