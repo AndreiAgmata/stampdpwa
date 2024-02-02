@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/LandingPage.scss";
 import NavBar from "./NavBar";
+import { FaApple } from "react-icons/fa";
+import { IoLogoAndroid } from "react-icons/io";
 
 function LandingPage() {
   return (
@@ -32,13 +34,48 @@ function LandingPage() {
                 streamlined loyalty program solution. Simplify rewards, no cards
                 needed.
               </p>
-              <div className="get-app d-flex gap-2">
-                <img src="/ios.svg" alt="download on ios" className="ios"></img>
-                <img
-                  src="/android.svg"
-                  alt="download on android"
-                  className="android"
-                ></img>
+              <div className="get-app d-flex flex-column flex-sm-row gap-3">
+                <div
+                  className="ios ps-2 pt-2 rounded-pill d-flex flex-row justify-content-start align-items-center "
+                  style={{
+                    backgroundColor: "#ffffff4d",
+                    width: "15rem",
+                    height: "4.75rem",
+                  }}
+                >
+                  <FaApple size={"3.5em"} style={{ marginTop: "-0.5rem" }} />
+                  <div className="text d-flex flex-column justify-content-center">
+                    <p className="m-0 fw-light">Get the app on</p>
+                    <p
+                      className="mb-0 fs-2 fw-medium"
+                      style={{ marginTop: "-0.5rem" }}
+                    >
+                      iOS
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className="ios ps-2 pt-2 rounded-pill d-flex flex-row justify-content-start align-items-center "
+                  style={{
+                    backgroundColor: "#ffffff4d",
+                    width: "15rem",
+                    height: "4.75rem",
+                  }}
+                >
+                  <IoLogoAndroid
+                    size={"3.5em"}
+                    style={{ marginTop: "-0.5rem" }}
+                  />
+                  <div className="text d-flex flex-column justify-content-center">
+                    <p className="m-0 fw-light">Get the app on</p>
+                    <p
+                      className="mb-0 fs-2 fw-medium"
+                      style={{ marginTop: "-0.5rem" }}
+                    >
+                      Android
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-sm-12 col-md-6 d-flex justify-content-center align-items-center order-1 order-md-2">
