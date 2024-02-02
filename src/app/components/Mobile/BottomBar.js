@@ -18,16 +18,11 @@ function BottomBar() {
             <TbCards size={"2em"} color="#f4f4f4" />
             <p style={{ fontSize: "0.75rem", margin: "0" }}>Cards</p>
           </Link>
-          <Link href={"/rewards"} className="me-3">
+          <Link href={"/rewards"}>
             <FiGift size={"1.75em"} color="#f4f4f4" />
             <p style={{ fontSize: "0.75rem", margin: "0" }}>Rewards</p>
           </Link>
-          <div className="center-wrapper">
-            <Link href={""} className="center">
-              <IoAddOutline size={"2em"} color="#6e72fc" />
-            </Link>
-          </div>
-          <Link href={"/account"} className="ms-3">
+          <Link href={"/account"}>
             <RiAccountCircleLine size={"2em"} color="#f4f4f4" />
             <p style={{ fontSize: "0.75rem", margin: "0" }}>Account</p>
           </Link>

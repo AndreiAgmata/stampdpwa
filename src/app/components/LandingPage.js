@@ -43,9 +43,15 @@ function LandingPage() {
                     height: "4.75rem",
                   }}
                 >
-                  <FaApple size={"3.5em"} style={{ marginTop: "-0.5rem" }} />
+                  <FaApple
+                    size={"3.5em"}
+                    style={{ marginTop: "-0.5rem" }}
+                    className="me-1"
+                  />
                   <div className="text d-flex flex-column justify-content-center">
-                    <p className="m-0 fw-light">Get the app on</p>
+                    <p className="m-0 fw-light" style={{ fontSize: "0.75rem" }}>
+                      Get the app on
+                    </p>
                     <p
                       className="mb-0 fs-2 fw-medium"
                       style={{ marginTop: "-0.5rem" }}
@@ -65,9 +71,12 @@ function LandingPage() {
                   <IoLogoAndroid
                     size={"3.5em"}
                     style={{ marginTop: "-0.5rem" }}
+                    className="me-1"
                   />
                   <div className="text d-flex flex-column justify-content-center">
-                    <p className="m-0 fw-light">Get the app on</p>
+                    <p className="m-0 fw-light" style={{ fontSize: "0.75rem" }}>
+                      Get the app on
+                    </p>
                     <p
                       className="mb-0 fs-2 fw-medium"
                       style={{ marginTop: "-0.5rem" }}

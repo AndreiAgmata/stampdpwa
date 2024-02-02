@@ -6,8 +6,8 @@
 }
 @media (max-width: 767px) {
   .home-section {
-    padding-top: 5rem;
-    padding-bottom: 10rem;
+    padding-top: 3rem;
+    padding-bottom: 7rem;
     padding-inline: 0;
     display: flex;
     justify-content: center;

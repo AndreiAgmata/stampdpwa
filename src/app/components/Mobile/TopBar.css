@@ -1,12 +1,19 @@
 .topbar-section {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   height: 5rem;
+  background-color: #f4f4f4;
+  z-index: 999;
 }
 @media (min-width: 767px) {
   .topbar-section {
     display: none;
+  }
+}
+@media all and (display-mode: standalone) {
+  .topbar-section {
+    height: 3rem;
   }
 }
 .topbar-section h1 {

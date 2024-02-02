@@ -33,7 +33,7 @@
   }
 }
 .landing-page .hero-header {
-  font-size: clamp(1rem, 1rem + 5vw, 3.75rem);
+  font-size: clamp(1rem, 1rem + 3vw, 3.75rem);
 }
 @media (max-width: 767px) {
   .landing-page .hero-header {

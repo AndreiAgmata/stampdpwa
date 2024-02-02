@@ -194,7 +194,7 @@ function Home(props) {
         {cards.length === 0 ? (
           <>
             <Cards
-              userCards={cards}
+              userCards={props.cards}
               handleSearchModalCard={handleSearchModal}
               handleScanModalCard={handleScanModal}
               className="d-block d-sm-none"
@@ -353,7 +353,7 @@ function Home(props) {
                         handleAddCard(business.businessId);
                       }}
                     >
-                      Add Card
+                      Add
                     </button>
                   </div>
                 ))}
