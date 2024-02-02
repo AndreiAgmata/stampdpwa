@@ -15,21 +15,25 @@ export async function GET() {
 
   try {
     await connectMongoDB();
-    console.log("connected to database");
+    console.log(userId);
 
-    const user = await User.findById(userId)
-      .populate({
-        path: "cards.businessRef",
-        model: "Business",
-        select: "activeCardRef",
-        populate: {
-          path: "activeCardRef",
-          model: "Card",
-        },
-      })
-      .select("cards");
-    console.log("fetched user");
-    console.log(user);
+    try {
+      const user = await User.findById(userId)
+        .populate({
+          path: "cards.businessRef",
+          model: "Business",
+          select: "activeCardRef",
+          populate: {
+            path: "activeCardRef",
+            model: "Card",
+          },
+        })
+        .select("cards");
+      console.log("fetched user");
+      console.log(user);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
 
     if (!user) {
       return NextResponse.json(
