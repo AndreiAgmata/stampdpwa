@@ -11,7 +11,7 @@ function NavBar() {
         <h1 className="title">stampd</h1>
         <button
           type="button"
-          className="btn btn-light"
+          className="btn btn-light d-block d-sm-none"
           onClick={() => router.push("/account/login")}
         >
           Login
