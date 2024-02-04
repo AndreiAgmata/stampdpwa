@@ -3,8 +3,11 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import "../../styles/account/my-account.scss";
 import { useState } from "react";
+import { IoIosArrowBack } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 function MyAccount({ props }) {
+  const router = useRouter();
   const [user, setUser] = useState(props.user);
   const [running, setRunning] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -23,6 +26,13 @@ function MyAccount({ props }) {
 
   return (
     <section className="my-account-section">
+      <div
+        className="back-btn mb-4 d-flex"
+        onClick={() => router.push("/home")}
+      >
+        <IoIosArrowBack size={"1.5em"} color="#393939" />
+        <p className="dark m-0 fw-medium">Back</p>
+      </div>
       <h1 className="dark fw-bold">My Account</h1>
       <div className="usage mt-5">
         <h3 className="dark fw-medium pb-2 border-bottom">Usage</h3>

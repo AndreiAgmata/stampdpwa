@@ -48,6 +48,7 @@ const Scanner = ({ triggerScan, onQRCodeScanned }) => {
         if (scannerRef.current.getState() === 2) {
           scannerRef.current.stop();
         }
+        scannerRef.current = null;
       }
     };
   }, []);
