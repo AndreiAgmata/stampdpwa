@@ -12,6 +12,7 @@ const Scanner = ({ triggerScan, onQRCodeScanned }) => {
         return;
       }
       if (!scannerRef.current?.getState()) {
+        console.log("creating scanner");
         scannerRef.current = new Html5Qrcode("reader");
         const config = { fps: 10, qrbox: { width: 250, height: 250 } };
         const qrCodeSuccessCallback = (decodedText) => {
@@ -23,20 +24,6 @@ const Scanner = ({ triggerScan, onQRCodeScanned }) => {
           config,
           qrCodeSuccessCallback
         );
-      } else if (scannerRef.current?.getState() === 1) {
-        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-        const qrCodeSuccessCallback = (decodedText) => {
-          scannerRef.current.stop();
-          onQRCodeScanned(decodedText);
-        };
-        console.log("starting scanner");
-        scannerRef.current.start(
-          { facingMode: "environment" },
-          config,
-          qrCodeSuccessCallback
-        );
-      } else if (scannerRef.current?.getState() === 2) {
-        scannerRef.current.stop();
       }
     },
     [onQRCodeScanned]
@@ -48,6 +35,7 @@ const Scanner = ({ triggerScan, onQRCodeScanned }) => {
         if (scannerRef.current.getState() === 2) {
           scannerRef.current.stop();
         }
+        console.log("here");
         scannerRef.current = null;
       }
     };
