@@ -9,4 +9,8 @@
         padding-top: 3rem;
         padding-inline: 1rem;
     }
+
+    @media (display-mode: standalone) {
+        padding-top: 1rem;
+      }
 }
