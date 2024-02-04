@@ -17,6 +17,12 @@ export const metadata = {
   icons: {
     apple: "/icon.png",
   },
+  metaTags: [
+    {
+      name: "apple-mobile-web-app-capable",
+      content: "yes",
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {
