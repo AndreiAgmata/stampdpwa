@@ -27,7 +27,7 @@ function LandingPage() {
           <div className="row">
             <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-center align-items-start order-2 order-md-1">
               <h1 className="fw-bold hero-header">
-                Embrace ease: <br /> Our streamlined loyalty program is here!
+                Start Collecting Rewards, No Cards Needed
               </h1>
               <p className="hero-description">
                 Say goodbye to missing loyalty cards with our hassle-free,
@@ -35,56 +35,16 @@ function LandingPage() {
                 needed.
               </p>
               <div className="get-app d-flex flex-column flex-sm-row gap-3">
-                <div
-                  className="ios ps-2 pt-2 rounded-pill d-flex flex-row justify-content-start align-items-center "
-                  style={{
-                    backgroundColor: "#ffffff4d",
-                    width: "15rem",
-                    height: "4.75rem",
-                  }}
-                >
-                  <FaApple
-                    size={"3.5em"}
-                    style={{ marginTop: "-0.5rem" }}
-                    className="me-1"
-                  />
-                  <div className="text d-flex flex-column justify-content-center">
-                    <p className="m-0 fw-light" style={{ fontSize: "0.75rem" }}>
-                      Get the app on
-                    </p>
-                    <p
-                      className="mb-0 fs-2 fw-medium"
-                      style={{ marginTop: "-0.5rem" }}
-                    >
-                      iOS
-                    </p>
-                  </div>
-                </div>
-                <div
-                  className="ios ps-2 pt-2 rounded-pill d-flex flex-row justify-content-start align-items-center "
-                  style={{
-                    backgroundColor: "#ffffff4d",
-                    width: "15rem",
-                    height: "4.75rem",
-                  }}
-                >
-                  <IoLogoAndroid
-                    size={"3.5em"}
-                    style={{ marginTop: "-0.5rem" }}
-                    className="me-1"
-                  />
-                  <div className="text d-flex flex-column justify-content-center">
-                    <p className="m-0 fw-light" style={{ fontSize: "0.75rem" }}>
-                      Get the app on
-                    </p>
-                    <p
-                      className="mb-0 fs-2 fw-medium"
-                      style={{ marginTop: "-0.5rem" }}
-                    >
-                      Android
-                    </p>
-                  </div>
-                </div>
+                <img
+                  src="/appstore.png"
+                  alt="app-store-logo"
+                  className="ios"
+                ></img>
+                <img
+                  src="/googleplay.png"
+                  alt="app-store-logo"
+                  className="android"
+                ></img>
               </div>
             </div>
             <div className="col-sm-12 col-md-6 d-flex justify-content-center align-items-center order-1 order-md-2">
