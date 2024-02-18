@@ -34,16 +34,16 @@ function LandingPage() {
                 streamlined loyalty program solution. Simplify rewards, no cards
                 needed.
               </p>
-              <div className="get-app d-flex flex-column flex-sm-row gap-3">
+              <div className="get-app d-flex flex-row gap-3">
                 <img
                   src="/appstore.png"
                   alt="app-store-logo"
-                  className="ios"
+                  className="downloadBtn"
                 ></img>
                 <img
                   src="/googleplay.png"
                   alt="app-store-logo"
-                  className="android"
+                  className="downloadBtn"
                 ></img>
               </div>
             </div>

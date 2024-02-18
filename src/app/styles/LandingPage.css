@@ -69,25 +69,19 @@
     align-items: center;
   }
 }
-.landing-page .get-app .android {
-  width: 12.5rem;
+.landing-page .get-app .downloadBtn {
+  width: 12rem;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
-.landing-page .get-app .android:hover {
-  transform: scale(1.05);
-  cursor: pointer;
+@media (max-width: 767px) {
+  .landing-page .get-app .downloadBtn {
+    width: 10rem;
+  }
 }
-.landing-page .get-app .ios {
-  width: 11rem;
-  height: auto;
-  -o-object-fit: contain;
-     object-fit: contain;
-  transition: transform 0.3s ease-in-out;
-}
-.landing-page .get-app .ios:hover {
+.landing-page .get-app .downloadBtn:hover {
   transform: scale(1.05);
   cursor: pointer;
 }/*# sourceMappingURL=LandingPage.css.map */

@@ -66,35 +66,28 @@
 
     }
 
-    .get-app{
-        
+    .get-app{   
         width: 100%;
         @media (max-width: 767px) {
             justify-content: center;
             align-items: center;
         }
         
-        .android{
-            width: 12.5rem;
+        .downloadBtn{
+            width: 12rem;
             height: auto;
             object-fit: cover;
             transition: transform 0.3s ease-in-out;
+
+            @media (max-width: 767px) {
+                width: 10rem;
+            }
 
             &:hover{
                 transform: scale(1.05);
                 cursor: pointer;
             }
         }
-        .ios{
-            width: 11rem;
-            height: auto;
-            object-fit: contain;
-            transition: transform 0.3s ease-in-out;
-            
-            &:hover{
-                transform: scale(1.05);
-                cursor: pointer;
-            }
-        }
+        
     }
 }
